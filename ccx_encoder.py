@@ -67,7 +67,6 @@ class CCXEncoder:
         self._trash_qubits = trash_qubits
         self._qubits = self.get_qubits()
 
-
         self._target_dm = self.create_tar_dm()
 
         self.n_input_samples=None
@@ -121,6 +120,7 @@ class CCXEncoder:
         infidelity = 0.0
         for U0 in self.input_space:
             U = U0 + circuit
+            U.n_qubits = (len(self._qubits))
             input = tq.simulate(U0, backend='qulacs', *args, **kwargs)
             target = tq.simulate(U, backend='qulacs', *args, **kwargs)
             print("{:25} --> {:25}".format(str(input), str(target)))

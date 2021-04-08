@@ -41,6 +41,7 @@ class evolved_ccx(CCXEncoder):
 
         input_samples=self.get_input_samples()
         for U0 in input_samples:
+            U.n_qubits = (len(self._qubits))
             wfn1= tq.simulate(U0+U, backend='qulacs', *args, **kwargs)
 
             dimension = 2**(len(self.qubits))
