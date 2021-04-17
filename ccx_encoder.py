@@ -1,5 +1,6 @@
 import tequila as tq
 import numpy
+import random
 import numbers
 
 from utils import *
@@ -59,10 +60,11 @@ class CCXEncoder:
         dims = [[2]*len(self._trash_qubits), [2]*len(self._trash_qubits)]
         return get_density_matrix(dimension, dims, wfn)
 
-    def __init__(self, input_space:list, trash_qubits:list, max_controls=2, *args, **kwargs):
+    def __init__(self, num_qubits:int,  input_space:list, trash_qubits:list, max_controls=2, *args, **kwargs):
         """
         :param input_states: list of computational basis states (circuits or strings like 00100)
         """
+        self.num_qubits = num_qubits
         self._input_space = self.assign_states(input_space)
         self._trash_qubits = trash_qubits
         self._qubits = self.get_qubits()
@@ -74,7 +76,7 @@ class CCXEncoder:
 
         self.max_controls=max_controls
 
-        assert len(self.input_space) <= 2**len(self.trash_qubits)
+        #assert len(self.input_space) <= 2**len(self.trash_qubits)
 
     def __call__(self, circuit_data:list, *args, **kwargs):
         """
@@ -96,11 +98,23 @@ class CCXEncoder:
         return U
 
     def sample_connection(self, p=None):
-        controls = list(numpy.random.choice(self.qubits+[None], size=self.max_controls, replace=True, p=p))
-        reduced = [q for q in self.qubits if q not in controls]
-        target = numpy.random.choice(reduced, size=1, replace=True, p=p)
-        connections = [target[0]]+[x for x in controls]
-        return tuple(connections)
+        num_controls = numpy.random.choice(list(range(3)))
+        if num_controls == 0:
+            target = numpy.random.choice(self.qubits, size=1, replace=True, p=p)
+            connections = [list(target)[0]]
+            return tuple(connections)
+        elif num_controls == 1:
+            controls = list(random.sample(self.qubits, k = num_controls))
+            reduced = [q for q in self.qubits if q not in controls]
+            target = numpy.random.choice(reduced, size=1, replace=True, p=p)
+            connections = [list(target)[0]]+[x for x in controls]
+            return tuple(connections)
+        elif num_controls == 2:
+            controls = list(random.sample(self.qubits, k = num_controls))
+            reduced = [q for q in self.qubits if q not in controls]
+            target = numpy.random.choice(reduced, size=1, replace=True, p=p)
+            connections = [list(target)[0]]+[x for x in controls]
+            return tuple(connections)
 
     def make_objective(self, circuit_data):
         U = self.make_circuit(circuit_data=circuit_data)
@@ -120,7 +134,8 @@ class CCXEncoder:
         infidelity = 0.0
         for U0 in self.input_space:
             U = U0 + circuit
-            U.n_qubits = (len(self._qubits))
+            U0.n_qubits = self.num_qubits
+            U.n_qubits = self.num_qubits
             input = tq.simulate(U0, backend='qulacs', *args, **kwargs)
             target = tq.simulate(U, backend='qulacs', *args, **kwargs)
             print("{:25} --> {:25}".format(str(input), str(target)))

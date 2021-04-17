@@ -1,8 +1,9 @@
 import tequila as tq
+import math
 
 from evolve import *
 
-def initiate_GA(num_generations = 1000, generation_size = 15, starting_circuits = [], max_circuit_len = 100,
+def initiate_GA(num_qubits = 4, num_generations = 1000, generation_size = 15, starting_circuits = [], max_circuit_len = 100,
                 metric_weight = {}, num_processors = 1, input_space = None, trash_qubits = None, max_controls= 1):
     """
     This fucntion is the main GA function that runs the genetic algorithm to generate
@@ -36,7 +37,7 @@ def initiate_GA(num_generations = 1000, generation_size = 15, starting_circuits 
     #generating the initial set of circuits
 
     circuits_data_dict  = {}
-    encoder = evolved_ccx(input_space=input_space, trash_qubits=trash_qubits, max_controls=max_controls)
+    encoder = evolved_ccx(num_qubits=num_qubits, input_space=input_space, trash_qubits=trash_qubits, max_controls=max_controls)
     while len(circuits_data_dict ) < generation_size:
         circuit_data = encoder.sample_connection()
         #print(circuit_data)
@@ -79,9 +80,64 @@ def initiate_GA(num_generations = 1000, generation_size = 15, starting_circuits 
             encoder.__str__(prev_circuit_data_dict[list(sorted_circuit_data_dict.keys())[0]])
             break
 
+def generate_target(num_qubits, keyword):
+    """
+
+    """
+    vaccum_state = ""
+    for _ in range(num_qubits):
+        vaccum_state += "0"
+    target_state = []
+    trash_qubits = []
+    if keyword == 'unary':
+        for ind in range(num_qubits):
+            temp_state = copy.deepcopy(vaccum_state)
+            temp = list(temp_state )
+            temp[ind] = "1"
+            temp_state  = "".join(temp)
+            target_state.append(temp_state)
+        data_q = math.ceil(math.log(num_qubits, 2))
+        for i in range(num_qubits - data_q):
+            trash_qubits.append(i)
+        return target_state, trash_qubits
+    elif keyword == "random_unary":
+        for _ in range(num_qubits):
+            temp_state = copy.deepcopy(vaccum_state)
+            temp = list(temp_state )
+            num_ = random_choice(list(range(1, num_qubits+1)))
+            choice = random_choice(list(range(num_qubits)), num_)
+            if isinstance(choice, np.int64):
+                choice = [choice]
+            for ind in choice:
+                temp[ind] = "1"
+            temp_state  = "".join(temp)
+            target_state.append(temp_state)
+        data_q = math.ceil(math.log(num_qubits, 2))
+        for i in range(num_qubits - data_q):
+            trash_qubits.append(i)
+        return target_state, trash_qubits
+    elif keyword == "random":
+        num_s = random_choice(list(range(2, 2**(num_qubits-1)-1)))
+        #print(num_s)
+        for _ in range(num_s):
+            temp_state = copy.deepcopy(vaccum_state)
+            temp = list(temp_state )
+            num_ = random_choice(list(range(1, num_qubits+1)))
+            choice = random_choice(list(range(num_qubits)), num_)
+            if isinstance(choice, np.int64):
+                choice = [choice]
+            for ind in choice:
+                temp[ind] = "1"
+            temp_state  = "".join(temp)
+            target_state.append(temp_state)
+        data_q = math.ceil(math.log(num_s, 2))
+        for i in range(num_qubits - data_q):
+            trash_qubits.append(i)
+        return target_state, trash_qubits
+
 if __name__ == "__main__":
-    input_space=["1100", "1001", "0110", "0011"]
-    trash_qubits=[0,1]
-    max_controls=1
-    metric_weight = {'infidelity':1.0, '2_rdm':1.0, '1_rdm':1.0, 'depth':0.1, 'num_2_q_gate':0.1, 'num_1_q_gate':0.1}
-    initiate_GA(input_space=input_space, trash_qubits=trash_qubits, max_controls=max_controls, metric_weight=metric_weight)
+    num_qubits = xxxx
+    input_space, trash_qubits = generate_target(num_qubits, "yyyy")
+    max_controls = 2
+    metric_weight = {'infidelity':1.0, '2_rdm':0.5, '1_rdm':0.5, 'depth':0.1, 'num_2_q_gate':0.01, 'num_1_q_gate':0.01}
+    initiate_GA(num_qubits=num_qubits, input_space=input_space, num_processors=8, generation_size=num_qubits*5, trash_qubits=trash_qubits, max_controls=max_controls, metric_weight=metric_weight)

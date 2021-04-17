@@ -275,7 +275,7 @@ def get_infidelity(rdm1, rdm2):
 
 g_seed = int(np.abs(np.random.randn(1)[0]*100) + 1) #random seed
 
-def random_choice(list_val, size=1, replace=True, prob = None):
+def random_choice(list_val, size=1, replace=False, prob = None):
     """
     This function calls the numpy.random.choice function with
     a new seed every time, and returns the values

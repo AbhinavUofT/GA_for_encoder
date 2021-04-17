@@ -1,6 +1,6 @@
 import tequila as tq
 import numpy as np
-import os, copy
+import os, copy, random
 import multiprocessing
 
 from utils import *
@@ -17,7 +17,7 @@ class evolved_ccx(CCXEncoder):
 
         """
         circuit = self.make_circuit(circuit_data)
-        tq.draw(circuit, backend='qiskit')
+        #tq.draw(circuit, backend='qiskit')
         print(circuit.__str__())
 
     def __call__(self, circuit_data:list, *args, **kwargs):
@@ -41,7 +41,8 @@ class evolved_ccx(CCXEncoder):
 
         input_samples=self.get_input_samples()
         for U0 in input_samples:
-            U.n_qubits = (len(self._qubits))
+            U0.n_qubits = self.num_qubits
+            U.n_qubits = self.num_qubits
             wfn1= tq.simulate(U0+U, backend='qulacs', *args, **kwargs)
 
             dimension = 2**(len(self.qubits))
@@ -205,17 +206,22 @@ def apply_random_mutation(encoder_obj, circuit_data):
             circuit_data.append(encoder_obj.sample_connection())
             success = True
         elif mutation == "replace":
-            controls = None
-            try:
-                controls = list(random_choice(encoder_obj.qubits+[None], size=encoder_obj.max_controls))
-            except:
-                controls = [random_choice(encoder_obj.qubits+[None], size=encoder_obj.max_controls)]
-
-            reduced = [q for q in encoder_obj.qubits if q not in controls]
-            target = numpy.random.choice(reduced, size=1)
-            connections = [target[0]]+[x for x in controls]
-
             choice = random_choice(list(range(len(circuit_data))))
+            num_controls = len(circuit_data[choice]) - 1
+            connections = None
+            if num_controls == 0:
+                target = np.random.choice(encoder_obj.qubits, size=1, replace=True)
+                connections = [list(target)[0]]
+            elif num_controls == 1:
+                controls = list(random.sample(encoder_obj.qubits, k = num_controls))
+                reduced = [q for q in encoder_obj.qubits if q not in controls]
+                target = np.random.choice(reduced, size=1, replace=True)
+                connections = [list(target)[0]]+[x for x in controls]
+            elif num_controls == 2:
+                controls = list(random.sample(encoder_obj.qubits, k = num_controls))
+                reduced = [q for q in encoder_obj.qubits if q not in controls]
+                target = np.random.choice(reduced, size=1, replace=True)
+                connections = [list(target)[0]]+[x for x in controls]
             circuit_data[choice] = tuple(connections)
             success = True
         elif mutation == "remove":
