@@ -18,7 +18,7 @@ class evolved_ccx(CCXEncoder):
         """
         circuit = self.make_circuit(circuit_data)
         #tq.draw(circuit, backend='qiskit')
-        print(circuit.__str__())
+        return circuit, circuit.__str__()
 
     def __call__(self, circuit_data:list, *args, **kwargs):
         """
@@ -173,10 +173,11 @@ def apply_generation_filter(sorted_circuit_str_l, generation_size):
     # Get the probabilities that a circuits with a given fitness will be replaced
     # a fermi function is used to smoothen the transition
     positions     = np.array(range(0, len(sorted_circuit_str_l))) - 0.5*float(len(sorted_circuit_str_l))
-    probabilities = 1.0 / (1.0 + np.exp(-0.5 * generation_size * positions / float(len(sorted_circuit_str_l))))
+    probabilities = 1.0 / (1.0 + np.exp(-0.1 * generation_size * positions / float(len(sorted_circuit_str_l))))
     """import matplotlib.pyplot as plt
     plt.plot(positions, probabilities)
-    plt.show()"""
+    plt.show()
+    raise Exception("test")"""
     to_replace = [] # all circuits that are replaced
     to_keep    = [] # all circuits that are kept
     for idx in range(0,len(sorted_circuit_str_l)):
@@ -192,7 +193,7 @@ def pick_mutation():
     This function samples randomly from the list and return the corresponding string
     """
     #add more later
-    mutation_list = ['add', 'replace', 'remove', 'permute', 'repeat']
+    mutation_list = ['add', 'replace', 'remove', 'repeat']
     return random_choice(mutation_list)
 
 def apply_random_mutation(encoder_obj, circuit_data):
@@ -210,16 +211,16 @@ def apply_random_mutation(encoder_obj, circuit_data):
             num_controls = len(circuit_data[choice]) - 1
             connections = None
             if num_controls == 0:
-                target = np.random.choice(encoder_obj.qubits, size=1, replace=True)
+                target = np.random.choice(encoder_obj.qubits_choice, size=1, replace=True)
                 connections = [list(target)[0]]
             elif num_controls == 1:
-                controls = list(random.sample(encoder_obj.qubits, k = num_controls))
-                reduced = [q for q in encoder_obj.qubits if q not in controls]
+                controls = list(random.sample(encoder_obj.qubits_choice, k = num_controls))
+                reduced = [q for q in encoder_obj.qubits_choice if q not in controls]
                 target = np.random.choice(reduced, size=1, replace=True)
                 connections = [list(target)[0]]+[x for x in controls]
             elif num_controls == 2:
-                controls = list(random.sample(encoder_obj.qubits, k = num_controls))
-                reduced = [q for q in encoder_obj.qubits if q not in controls]
+                controls = list(random.sample(encoder_obj.qubits_choice, k = num_controls))
+                reduced = [q for q in encoder_obj.qubits_choice if q not in controls]
                 target = np.random.choice(reduced, size=1, replace=True)
                 connections = [list(target)[0]]+[x for x in controls]
             circuit_data[choice] = tuple(connections)
@@ -236,6 +237,9 @@ def apply_random_mutation(encoder_obj, circuit_data):
                 mutation = random_choice(["add", "replace"])
             else:
                 circuit_data = random_permutation(circuit_data)
+                for ind, data in enumerate(circuit_data):
+                    circuit_data[ind] = tuple(data)
+                circuit_data = list(circuit_data)
                 success = True
         elif mutation == "repeat":
             if len(circuit_data) <= 1:
@@ -246,6 +250,7 @@ def apply_random_mutation(encoder_obj, circuit_data):
                 success = True
         else:
             raise Exception("The mutation type selected, {0}, is not implemented yet".format(mutation))
+    #print(mutation, circuit_data)
     return circuit_data
 
 def sort_by_qubits(circuit_data):
@@ -255,23 +260,26 @@ def sort_by_qubits(circuit_data):
     #print(circuit_data)
     circuit_data = sorted(circuit_data, key=lambda item: item[0])
     #print(circuit_data)
-    return circuit_data
     #raise Exception("testing")
+    return circuit_data
+
 
 def compress_circuit_str(circuit_data):
     """
 
     """
+    new_data = copy.deepcopy(circuit_data)
     circuit_data = sort_by_qubits(circuit_data)
     prev_data = circuit_data[0]
     prev_data = "".join(map(str, prev_data))
     for data in circuit_data[1:]:
         curr_data_str = "".join(map(str, data))
         if curr_data_str == prev_data:
-            return True
+            new_data.remove(data)
+            #return True
         else:
             prev_data = curr_data_str
-    return False
+    return new_data, False
 
 def generate_next_generation_circuits(encoder_obj, circuit_data_dict, keep_list, replace_list):
     """
@@ -294,19 +302,26 @@ def generate_next_generation_circuits(encoder_obj, circuit_data_dict, keep_list,
     next_gen_circuits = {}
     keys_l = list(circuit_data_dict.keys())
     for index in keep_list:
-        next_gen_circuits[keys_l[index]] = circuit_data_dict[keys_l[index]]
+        #print(index)
+        next_gen_circuits[keys_l[index]] = copy.deepcopy(circuit_data_dict[keys_l[index]])
     for index in replace_list:
+        #print(index)
         sim = [1.0]
         mutated_circuit_data = None
-        repetition = True
-        while np.mean(sim) >= 0.75 or np.median(sim) >= 0.75 or max(sim) >= 0.95 and repetition:
+        done = True
+        while done == True:
             random_index = random_choice(keep_list)
             mutated_circuit_data = apply_random_mutation(encoder_obj, circuit_data_dict[keys_l[random_index]])
             if len(next_gen_circuits) == 0:
                 sim = [0.0]
             else:
                 sim = calculate_similarity(next_gen_circuits.values(), mutated_circuit_data)
-            repetition = compress_circuit_str(mutated_circuit_data)
+            mutated_circuit_data, repetition = compress_circuit_str(mutated_circuit_data)
+            #print(mutated_circuit_data)
+            #print(repetition, np.mean(sim), np.median(sim), max(sim))
+            if np.mean(sim) <= 0.75 and np.median(sim) <= 0.75 and max(sim) < 0.9 and repetition == False:
+                done = False
+        #print(mutated_circuit_data)
         next_gen_circuits[keys_l[index]] = mutated_circuit_data
 
     return next_gen_circuits

@@ -60,7 +60,7 @@ class CCXEncoder:
         dims = [[2]*len(self._trash_qubits), [2]*len(self._trash_qubits)]
         return get_density_matrix(dimension, dims, wfn)
 
-    def __init__(self, num_qubits:int,  input_space:list, trash_qubits:list, max_controls=2, *args, **kwargs):
+    def __init__(self, num_qubits:int, qubits:list,  input_space:list, trash_qubits:list, max_controls=2, *args, **kwargs):
         """
         :param input_states: list of computational basis states (circuits or strings like 00100)
         """
@@ -68,6 +68,7 @@ class CCXEncoder:
         self._input_space = self.assign_states(input_space)
         self._trash_qubits = trash_qubits
         self._qubits = self.get_qubits()
+        self.qubits_choice = qubits
 
         self._target_dm = self.create_tar_dm()
 
@@ -98,20 +99,20 @@ class CCXEncoder:
         return U
 
     def sample_connection(self, p=None):
-        num_controls = numpy.random.choice(list(range(3)))
+        num_controls = numpy.random.choice(list(range(self.max_controls+1)))
         if num_controls == 0:
-            target = numpy.random.choice(self.qubits, size=1, replace=True, p=p)
+            target = numpy.random.choice(self.qubits_choice, size=1, replace=True, p=p)
             connections = [list(target)[0]]
             return tuple(connections)
         elif num_controls == 1:
-            controls = list(random.sample(self.qubits, k = num_controls))
-            reduced = [q for q in self.qubits if q not in controls]
+            controls = list(random.sample(self.qubits_choice, k = num_controls))
+            reduced = [q for q in self.qubits_choice if q not in controls]
             target = numpy.random.choice(reduced, size=1, replace=True, p=p)
             connections = [list(target)[0]]+[x for x in controls]
             return tuple(connections)
         elif num_controls == 2:
-            controls = list(random.sample(self.qubits, k = num_controls))
-            reduced = [q for q in self.qubits if q not in controls]
+            controls = list(random.sample(self.qubits_choice, k = num_controls))
+            reduced = [q for q in self.qubits_choice if q not in controls]
             target = numpy.random.choice(reduced, size=1, replace=True, p=p)
             connections = [list(target)[0]]+[x for x in controls]
             return tuple(connections)

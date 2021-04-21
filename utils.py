@@ -194,8 +194,14 @@ def get_1_rdm_distance(rdm1, rdm2, qubits, quadratic=True):
 
     rdm_distance = 0.0
     for qubit in qubits:
-        t_rdm1 = get_reduced_density_matrix(rdm1, [qubit])
-        t_rdm2 = get_reduced_density_matrix(rdm2, [qubit])
+        t_rdm1 = None
+        t_rdm2 = None
+        if rdm1.shape ==  (2, 2):
+            t_rdm1 = rdm1
+            t_rdm2 = rdm2
+        else:
+            t_rdm1 = get_reduced_density_matrix(rdm1, [qubit])
+            t_rdm2 = get_reduced_density_matrix(rdm2, [qubit])
         #print(rdm1, rdm2)
         diff = qt.Qobj(np.abs((t_rdm1 - t_rdm2).data))
         #print(diff)

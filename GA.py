@@ -3,7 +3,7 @@ import math
 
 from evolve import *
 
-def initiate_GA(num_qubits = 4, num_generations = 1000, generation_size = 15, starting_circuits = [], max_circuit_len = 100,
+def initiate_GA(num_qubits = 4, qubits=[0,1,2,3], num_generations = 1000, generation_size = 15, starting_circuits = [], max_circuit_len = 100,
                 metric_weight = {}, num_processors = 1, input_space = None, trash_qubits = None, max_controls= 1):
     """
     This fucntion is the main GA function that runs the genetic algorithm to generate
@@ -34,10 +34,13 @@ def initiate_GA(num_qubits = 4, num_generations = 1000, generation_size = 15, st
     output:
 
     """
+    best_circuit = None
+    best_circuit_str = None
     #generating the initial set of circuits
 
     circuits_data_dict  = {}
-    encoder = evolved_ccx(num_qubits=num_qubits, input_space=input_space, trash_qubits=trash_qubits, max_controls=max_controls)
+    encoder = evolved_ccx(num_qubits=num_qubits, qubits=qubits, input_space=input_space, trash_qubits=[trash_qubits[0]], max_controls=max_controls)
+
     while len(circuits_data_dict ) < generation_size:
         circuit_data = encoder.sample_connection()
         #print(circuit_data)
@@ -45,7 +48,7 @@ def initiate_GA(num_qubits = 4, num_generations = 1000, generation_size = 15, st
             circuits_data_dict["cir{0}".format(len(circuits_data_dict ))] = [circuit_data]
         else:
             sim = calculate_similarity(circuits_data_dict.values() , circuit_data)
-            if np.mean(sim) <= 0.7 and np.median(sim) <= 0.7 and max(sim)<1.0:
+            if np.mean(sim) <= 0.7 and np.median(sim) <= 0.7 and max(sim)<=0.9:
                 if "cir{0}".format(len(circuits_data_dict)) in circuits_data_dict.keys():
                     circuits_data_dict["cir{0}".format(len(circuits_data_dict))].append(circuit_data)
                 else:
@@ -69,16 +72,50 @@ def initiate_GA(num_qubits = 4, num_generations = 1000, generation_size = 15, st
 
         #print("*** new population details: \n circuits {0}, \n ".format(curr_gen_cirs_str))
         sorted_circuit_data_dict, sorted_fitness = fitness(encoder, curr_gen_data_dict, num_processors, metric_weight)
+        prev_circuit_data_dict = {key : curr_gen_data_dict[key] for key in list(sorted_circuit_data_dict.keys())}
+        print("*** population details: 5 best circuits \n circuits {0}, \n fitness {1} \n".format(dict(list(prev_circuit_data_dict.items())[0: 5]) , sorted_fitness[0:5]))
 
-        prev_circuit_data_dict = {key : prev_circuit_data_dict[key] for key in list(sorted_circuit_data_dict.keys())}
-        print("*** population details: \n circuits {0}, \n fitness {1} \n".format(prev_circuit_data_dict, sorted_fitness))
-
-        print("**** best transforamtion at the begining: ")
+        print("**** best transforamtion of this generation: ")
         infidelity = encoder.analyze(encoder.make_circuit(prev_circuit_data_dict[list(sorted_circuit_data_dict.keys())[0]]))
         print("Infidelity : ", infidelity)
         if infidelity == 0.0:
-            encoder.__str__(prev_circuit_data_dict[list(sorted_circuit_data_dict.keys())[0]])
+            intermed_cir, intermed_circ_str =  encoder.__str__(prev_circuit_data_dict[list(sorted_circuit_data_dict.keys())[0]])
+            best_circuit = intermed_cir
+            best_circuit_str = intermed_circ_str
+            #qubits.remove(qubit)
+            encoder.qubits_choice.remove(trash_qubits[0])
+            for ind, _ in enumerate(encoder._input_space):
+                encoder._input_space[ind] += intermed_cir
             break
+
+    for qubit in trash_qubits[1:]:
+        encoder._trash_qubits.append(qubit)
+        encoder._target_dm = encoder.create_tar_dm()
+        # Startting the evolution loop
+        for index in range(1, num_generations+1):
+            print("   ###   On generation %i of %i"%(index, num_generations))
+            replace, keep =  apply_generation_filter(list(prev_circuit_data_dict.keys()), generation_size)
+
+            curr_gen_data_dict = generate_next_generation_circuits(encoder, prev_circuit_data_dict, keep, replace)
+
+            #print("*** new population details: \n circuits {0}, \n ".format(curr_gen_cirs_str))
+            sorted_circuit_data_dict, sorted_fitness = fitness(encoder, curr_gen_data_dict, num_processors, metric_weight)
+            prev_circuit_data_dict = {key : curr_gen_data_dict[key] for key in list(sorted_circuit_data_dict.keys())}
+            print("*** population details: 5 best circuits \n circuits {0}, \n fitness {1} \n".format(dict(list(prev_circuit_data_dict.items())[0: 5]) , sorted_fitness[0:5]))
+
+            print("**** best transforamtion of this generation: ")
+            infidelity = encoder.analyze(encoder.make_circuit(prev_circuit_data_dict[list(sorted_circuit_data_dict.keys())[0]]))
+            print("Infidelity : ", infidelity)
+            if infidelity == 0.0:
+                intermed_cir, circ_str =  encoder.__str__(prev_circuit_data_dict[list(sorted_circuit_data_dict.keys())[0]])
+                best_circuit += intermed_cir
+                best_circuit_str += intermed_circ_str
+                #qubits.remove(qubit)
+                encoder.qubits_choice.remove(qubit)
+                for ind, _ in enumerate(encoder._input_space):
+                    encoder._input_space[ind] += intermed_cir
+                break
+        return best_circuit
 
 def generate_target(num_qubits, keyword):
     """
@@ -137,7 +174,10 @@ def generate_target(num_qubits, keyword):
 
 if __name__ == "__main__":
     num_qubits = xxxx
+    qubits = list(range(num_qubits))
     input_space, trash_qubits = generate_target(num_qubits, "yyyy")
+
     max_controls = 2
-    metric_weight = {'infidelity':1.0, '2_rdm':0.5, '1_rdm':0.5, 'depth':0.1, 'num_2_q_gate':0.01, 'num_1_q_gate':0.01}
-    initiate_GA(num_qubits=num_qubits, input_space=input_space, num_processors=8, generation_size=num_qubits*5, trash_qubits=trash_qubits, max_controls=max_controls, metric_weight=metric_weight)
+    metric_weight = {'infidelity':1.0, '2_rdm':1.0, '1_rdm':1.0, 'depth':float(0.5/num_qubits), 'num_2_q_gate':float(0.25/num_qubits), 'num_1_q_gate':float(0.24/num_qubits)}
+    best_circuit = initiate_GA(num_qubits=num_qubits, qubits=qubits, input_space=input_space, num_processors=2, generation_size=num_qubits*10, trash_qubits=trash_qubits, max_controls=max_controls, metric_weight=metric_weight)
+    print(best_circuit)
