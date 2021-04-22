@@ -109,12 +109,22 @@ class CCXEncoder:
             reduced = [q for q in self.qubits_choice if q not in controls]
             target = numpy.random.choice(reduced, size=1, replace=True, p=p)
             connections = [list(target)[0]]+[x for x in controls]
+            if self._trash_qubits[-1] not in connections:
+                choice = random_choice(list(range(len(connections))))
+                choice_1 = random_choice([0, 1, 1, 1])
+                if choice_1 == 0:
+                    connections[choice] = self._trash_qubits[-1]
             return tuple(connections)
         elif num_controls == 2:
             controls = list(random.sample(self.qubits_choice, k = num_controls))
             reduced = [q for q in self.qubits_choice if q not in controls]
             target = numpy.random.choice(reduced, size=1, replace=True, p=p)
             connections = [list(target)[0]]+[x for x in controls]
+            if self._trash_qubits[-1] not in connections:
+                choice = random_choice(list(range(len(connections))))
+                choice_1 = random_choice([0, 1, 1, 1])
+                if choice_1 == 0:
+                    connections[choice] = self._trash_qubits[-1]
             return tuple(connections)
 
     def make_objective(self, circuit_data):

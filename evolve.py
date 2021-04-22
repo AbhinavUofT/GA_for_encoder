@@ -151,7 +151,7 @@ def fitness(encoder_obj, circuit_data_dict, num_processors, metric_weight):
 
     return sorted_circuit_data_dict, sorted_fitness
 
-def apply_generation_filter(sorted_circuit_str_l, generation_size):
+def apply_generation_filter(sorted_circuit_str_l, generation_size, compression= False):
     """
     This function calculates the probabilities that the circuit should be kept or not
     using the Fermi-Dirac distribution and then returns the inst of indices of the circuits
@@ -173,7 +173,13 @@ def apply_generation_filter(sorted_circuit_str_l, generation_size):
     # Get the probabilities that a circuits with a given fitness will be replaced
     # a fermi function is used to smoothen the transition
     positions     = np.array(range(0, len(sorted_circuit_str_l))) - 0.5*float(len(sorted_circuit_str_l))
-    probabilities = 1.0 / (1.0 + np.exp(-0.1 * generation_size * positions / float(len(sorted_circuit_str_l))))
+    probabilities = None
+    if compression:
+        to_replace = list(range(1,len(sorted_circuit_str_l)))# all circuits that are replaced
+        to_keep    = [0]
+        return to_replace, to_keep
+    else:
+        probabilities = 1.0 / (1.0 + np.exp(-0.1 * generation_size * positions / float(len(sorted_circuit_str_l))))
     """import matplotlib.pyplot as plt
     plt.plot(positions, probabilities)
     plt.show()
@@ -188,19 +194,27 @@ def apply_generation_filter(sorted_circuit_str_l, generation_size):
 
     return to_replace, to_keep
 
-def pick_mutation():
+def pick_mutation(list_of_choices):
     """
     This function samples randomly from the list and return the corresponding string
     """
     #add more later
-    mutation_list = ['add', 'replace', 'remove', 'repeat']
-    return random_choice(mutation_list)
+    mutation_list = ['add']
+    full_mutation_l = ['add', 'replace', 'remove', 'repeat']
+    compress_mutation_l = ['remove']
+    choice = random_choice(list_of_choices)
+    if choice == 0:
+        return random_choice(mutation_list)
+    elif choice == 1:
+        return random_choice(full_mutation_l)
+    else:
+        return random_choice(compress_mutation_l)
 
-def apply_random_mutation(encoder_obj, circuit_data):
+def apply_random_mutation(encoder_obj, circuit_data, list_of_choices):
     """
 
     """
-    mutation = pick_mutation()
+    mutation = pick_mutation(list_of_choices)
     success = False
     while  not success:
         if mutation == "add":
@@ -208,8 +222,18 @@ def apply_random_mutation(encoder_obj, circuit_data):
             success = True
         elif mutation == "replace":
             choice = random_choice(list(range(len(circuit_data))))
-            num_controls = len(circuit_data[choice]) - 1
+            num_controls = 1
             connections = None
+            try:
+                num_controls = len(circuit_data[choice]) - 1
+                if num_controls == 2:
+                    controls = list(random.sample(encoder_obj.qubits_choice, k = num_controls))
+                    reduced = [q for q in encoder_obj.qubits_choice if q not in controls]
+                    target = np.random.choice(reduced, size=1, replace=True)
+                    connections = [list(target)[0]]+[x for x in controls]
+            except:
+                num_controls = encoder_obj.n_qubits - len(encoder_obj._trash_qubits) - 1
+
             if num_controls == 0:
                 target = np.random.choice(encoder_obj.qubits_choice, size=1, replace=True)
                 connections = [list(target)[0]]
@@ -218,11 +242,7 @@ def apply_random_mutation(encoder_obj, circuit_data):
                 reduced = [q for q in encoder_obj.qubits_choice if q not in controls]
                 target = np.random.choice(reduced, size=1, replace=True)
                 connections = [list(target)[0]]+[x for x in controls]
-            elif num_controls == 2:
-                controls = list(random.sample(encoder_obj.qubits_choice, k = num_controls))
-                reduced = [q for q in encoder_obj.qubits_choice if q not in controls]
-                target = np.random.choice(reduced, size=1, replace=True)
-                connections = [list(target)[0]]+[x for x in controls]
+
             circuit_data[choice] = tuple(connections)
             success = True
         elif mutation == "remove":
@@ -281,7 +301,7 @@ def compress_circuit_str(circuit_data):
             prev_data = curr_data_str
     return new_data, False
 
-def generate_next_generation_circuits(encoder_obj, circuit_data_dict, keep_list, replace_list):
+def generate_next_generation_circuits(encoder_obj, circuit_data_dict, keep_list, replace_list, list_of_choices):
     """
     This function generates the next generation of circuits by replacing the circuits to be
     removed with mutations of circuits from the keep list
@@ -289,12 +309,13 @@ def generate_next_generation_circuits(encoder_obj, circuit_data_dict, keep_list,
     param: circuit_data_dict (dict) ->
     param: keep_list (list) -> a list of indices of circuits to keep in the next generation
     param: replace_list (list) -> a list of indices of circuits to replace in the next generation
-
+    param: list_of_choices (list) ->
     e.g.:
     input:
     circuit_data_dict ->
     keep_list ->
     replace_list ->
+    list_of_choices ->
 
     output:
 
@@ -311,7 +332,7 @@ def generate_next_generation_circuits(encoder_obj, circuit_data_dict, keep_list,
         done = True
         while done == True:
             random_index = random_choice(keep_list)
-            mutated_circuit_data = apply_random_mutation(encoder_obj, circuit_data_dict[keys_l[random_index]])
+            mutated_circuit_data = apply_random_mutation(encoder_obj, circuit_data_dict[keys_l[random_index]], list_of_choices)
             if len(next_gen_circuits) == 0:
                 sim = [0.0]
             else:
