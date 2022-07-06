@@ -1,0 +1,543 @@
+Target state basis states:  ['10000', '01000', '00100', '00010', '00001']
+Qubits to be compressed:  [0, 1]
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+****Starting Evolution: 
+ circuits {'cir1': [(2,)], 'cir5': [(2, 3)], 'cir3': [(4, 2)], 'cir2': [(1, 4)], 'cir7': [(2, 1)], 'cir4': [(4, 0)], 'cir6': [(1, 3, 4)], 'cir0': [(1, 0, 4)], 'cir9': [(2, 4)], 'cir10': [(4, 1)], 'cir13': [(3,)], 'cir11': [(4, 0)], 'cir8': [(2, 1, 3)], 'cir14': [(4, 2, 3)], 'cir15': [(3, 0, 2)], 'cir19': [(2, 4)], 'cir21': [(2,)], 'cir17': [(0, 2, 1)], 'cir16': [(4, 0, 1)], 'cir23': [(2,)], 'cir18': [(3, 4, 0)], 'cir22': [(3, 2)], 'cir20': [(3, 2, 4)], 'cir27': [(1,)], 'cir31': [(2,)], 'cir25': [(3, 2)], 'cir28': [(4, 1)], 'cir24': [(0, 4, 1)], 'cir26': [(0, 2, 1)], 'cir30': [(3, 0, 2)], 'cir29': [(3, 2, 1)], 'cir32': [(2, 4)], 'cir35': [(1,)], 'cir37': [(1,)], 'cir39': [(2,)], 'cir38': [(1, 3)], 'cir41': [(2, 0)], 'cir46': [(4,)], 'cir44': [(1, 4, 3)], 'cir45': [(3, 4, 1)], 'cir48': [(1,)], 'cir49': [(3,)], 'cir12': [(0, 2)], 'cir34': [(0, 1)], 'cir36': [(0, 1)], 'cir40': [(0, 4)], 'cir43': [(0, 4)], 'cir33': [(0,)], 'cir42': [(0,)], 'cir47': [(0,)]}, 
+ fitness [5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 10.0, 10.0, 10.0, 10.0, 10.0, 20.0, 20.0, 20.0] 
+
+**** best transforamtion at the begining: 
++1.0000|10000>            --> +1.0000|10100>           
++1.0000|01000>            --> +1.0000|01100>           
++1.0000|00100>            --> +1.0000|00000>           
++1.0000|00010>            --> +1.0000|00110>           
++1.0000|00001>            --> +1.0000|00101>           
+   ###   On generation 1 of 10000
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir1': [(2,)], 'cir7': [(2, 1)], 'cir5': [(2, 3)], 'cir3': [(4, 2)], 'cir2': [(1, 4)]}, 
+ fitness [5.0, 5.0, 5.0, 5.0, 5.0] 
+
+**** best transforamtion of this generation: 
++1.0000|10000>            --> +1.0000|10100>           
++1.0000|01000>            --> +1.0000|01100>           
++1.0000|00100>            --> +1.0000|00000>           
++1.0000|00010>            --> +1.0000|00110>           
++1.0000|00001>            --> +1.0000|00101>           
+Infidelity :  1.0
+   ###   On generation 2 of 10000
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir1': [(2,)], 'cir3': [(4, 2)], 'cir4': [(4, 0)], 'cir5': [(2, 3)], 'cir2': [(1, 4)]}, 
+ fitness [5.0, 5.0, 5.0, 5.0, 5.0] 
+
+**** best transforamtion of this generation: 
++1.0000|10000>            --> +1.0000|10100>           
++1.0000|01000>            --> +1.0000|01100>           
++1.0000|00100>            --> +1.0000|00000>           
++1.0000|00010>            --> +1.0000|00110>           
++1.0000|00001>            --> +1.0000|00101>           
+Infidelity :  1.0
+   ###   On generation 3 of 10000
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir5': [(2, 3)], 'cir13': [(3,)], 'cir3': [(4, 2)], 'cir2': [(1, 4)], 'cir4': [(4, 0)]}, 
+ fitness [5.0, 5.0, 5.0, 5.0, 5.0] 
+
+**** best transforamtion of this generation: 
++1.0000|10000>            --> +1.0000|10000>           
++1.0000|01000>            --> +1.0000|01000>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00110>           
++1.0000|00001>            --> +1.0000|00001>           
+Infidelity :  1.0
+   ###   On generation 4 of 10000
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir13': [(3,)], 'cir5': [(2, 3)], 'cir2': [(1, 4)], 'cir4': [(4, 0)], 'cir3': [(4, 2)]}, 
+ fitness [5.0, 5.0, 5.0, 5.0, 5.0] 
+
+**** best transforamtion of this generation: 
++1.0000|10000>            --> +1.0000|10010>           
++1.0000|01000>            --> +1.0000|01010>           
++1.0000|00100>            --> +1.0000|00110>           
++1.0000|00010>            --> +1.0000|00000>           
++1.0000|00001>            --> +1.0000|00011>           
+Infidelity :  1.0
+   ###   On generation 5 of 10000
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir28': [(1, 0, 3), (3, 0), (4, 0), (0, 4, 3), (2, 0)], 'cir13': [(3,)], 'cir27': [(1,)], 'cir5': [(2, 3)], 'cir38': [(1, 3)]}, 
+ fitness [0.0, 5.0, 5.0, 5.0, 5.0] 
+
+**** best transforamtion of this generation: 
++1.0000|10000>            --> +1.0000|00011>           
++1.0000|01000>            --> +1.0000|01000>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00010>           
++1.0000|00001>            --> +1.0000|00001>           
+Infidelity :  0.0
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+****Starting Evolution: 
+ circuits {'cir4': [(2, 4), (0,), (0,)], 'cir7': [(2, 1), (2, 0), (2,), (1, 2, 0), (2,), (4, 0, 1), (3, 0)], 'cir11': [(4, 0), (1, 0, 4), (2,)], 'cir15': [(3, 0, 2), (3, 2, 0), (1, 0), (1, 3, 2), (3, 2, 1), (3, 0, 2), (2, 0)], 'cir18': [(3, 4, 0)], 'cir16': [(4, 0, 1), (3,)], 'cir19': [(2, 4)], 'cir17': [(0, 2, 1), (0, 2, 4), (1, 0), (4,)], 'cir21': [(2,)], 'cir22': [(3, 2), (4, 3), (2, 1, 3), (4,)], 'cir26': [(0, 2, 1)], 'cir28': [(4, 1)], 'cir24': [(0, 4, 1), (3, 1), (1,), (1,), (1, 0)], 'cir30': [(3, 0, 2)], 'cir29': [(3, 2, 1)], 'cir31': [(2,)], 'cir32': [(2, 4)], 'cir39': [(2,)], 'cir41': [(2, 0)], 'cir45': [(3, 4, 1)], 'cir46': [(4,)], 'cir49': [(3,)], 'cir34': [(0, 1)], 'cir36': [(0, 1)], 'cir3': [(4, 2), (0, 2)], 'cir12': [(0, 2)], 'cir14': [(4, 2, 3), (2, 1, 3), (0, 2)], 'cir23': [(2,), (4, 3, 0), (2,), (1, 2)], 'cir25': [(3, 0), (0, 2), (3, 0), (4, 0), (3, 1)], 'cir44': [(1, 4, 3), (4, 0, 3), (1, 2, 3), (4, 0, 1)], 'cir2': [(1, 4), (2,), (0, 3, 2), (1, 4), (1, 0), (1, 0)], 'cir9': [(2, 4), (1, 3), (2,), (4, 2, 3), (3,)], 'cir38': [(0, 3), (0, 4, 2), (4,)], 'cir40': [(0, 4)], 'cir43': [(0, 4)], 'cir1': [(2,), (2,), (4,), (0, 4), (2,)], 'cir5': [(3, 2), (2, 4), (1,), (4,)], 'cir8': [(4, 0, 2), (1,), (2,), (3, 0)], 'cir35': [(1,)], 'cir48': [(1,)], 'cir0': [(4, 2, 3), (1, 0, 2), (1, 0, 2), (2,), (0, 2)], 'cir13': [(4,), (0,), (4, 3, 1)], 'cir10': [(4, 1), (3, 4, 0), (0, 1, 3), (0,), (3, 0), (4,)], 'cir20': [(3, 2, 4), (0,), (2, 1, 0), (2,)], 'cir27': [(1,), (0,), (1, 2, 0), (0, 4), (0, 2, 1), (4, 2, 1)], 'cir33': [(0,)], 'cir37': [(0,), (4,)], 'cir42': [(0,)], 'cir47': [(0,)], 'cir6': [(4, 3, 1), (3,), (0,), (1, 0), (2,)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 13.0, 13.0, 18.0, 18.0, 18.0, 18.0, 18.0, 18.0, 27.0, 27.0, 27.0, 27.0, 27.0, 31.0, 36.0, 36.0, 36.0, 36.0, 40.0, 49.0, 49.0, 49.0, 49.0, 49.0, 49.0, 49.0, 49.0, 61.0] 
+
+**** best transforamtion at the begining: 
++1.0000|00011>            --> +1.0000|00111>           
++1.0000|01000>            --> +1.0000|01000>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00010>           
++1.0000|00001>            --> +1.0000|00101>           
+   ###   On generation 1 of 10000
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir19': [(2, 4)], 'cir16': [(4, 0, 1), (3,)], 'cir11': [(4, 0), (1, 0, 4), (2,)], 'cir7': [(2, 1), (2, 0), (2,), (1, 2, 0), (2,), (4, 0, 1), (3, 0)], 'cir17': [(0, 2, 1), (0, 2, 4), (1, 0), (4,)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00111>           
++1.0000|01000>            --> +1.0000|01000>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00010>           
++1.0000|00001>            --> +1.0000|00101>           
+Infidelity :  1.0
+   ###   On generation 2 of 10000
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir19': [(2, 4)], 'cir18': [(3, 4, 0)], 'cir16': [(4, 0, 1), (3,)], 'cir4': [(2, 4), (0,), (0,)], 'cir11': [(4, 0), (1, 0, 4), (2,)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00111>           
++1.0000|01000>            --> +1.0000|01000>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00010>           
++1.0000|00001>            --> +1.0000|00101>           
+Infidelity :  1.0
+   ###   On generation 3 of 10000
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir21': [(2,)], 'cir26': [(0, 2, 1)], 'cir16': [(4, 0, 1), (3,)], 'cir19': [(2, 4)], 'cir11': [(4, 0), (1, 0, 4), (2,)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00111>           
++1.0000|01000>            --> +1.0000|01100>           
++1.0000|00100>            --> +1.0000|00000>           
++1.0000|00010>            --> +1.0000|00110>           
++1.0000|00001>            --> +1.0000|00101>           
+Infidelity :  1.0
+   ###   On generation 4 of 10000
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir26': [(0, 2, 1)], 'cir28': [(4, 1)], 'cir19': [(2, 4)], 'cir4': [(2, 4), (0,), (0,)], 'cir16': [(4, 0, 1), (3,)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00011>           
++1.0000|01000>            --> +1.0000|01000>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00010>           
++1.0000|00001>            --> +1.0000|00001>           
+Infidelity :  1.0
+   ###   On generation 5 of 10000
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir28': [(4, 1)], 'cir41': [(2, 0)], 'cir26': [(0, 2, 1)], 'cir19': [(2, 4)], 'cir4': [(2, 4), (0,), (0,)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00011>           
++1.0000|01000>            --> +1.0000|01001>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00010>           
++1.0000|00001>            --> +1.0000|00001>           
+Infidelity :  1.0
+   ###   On generation 6 of 10000
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir19': [(2, 4)], 'cir16': [(4, 0, 1), (3,)], 'cir26': [(0, 2, 1)], 'cir28': [(4, 1)], 'cir4': [(2, 4), (0,), (0,)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00111>           
++1.0000|01000>            --> +1.0000|01000>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00010>           
++1.0000|00001>            --> +1.0000|00101>           
+Infidelity :  1.0
+   ###   On generation 7 of 10000
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir16': [(4, 0, 1), (3,)], 'cir19': [(2, 4)], 'cir40': [(4, 2), (3, 4, 1)], 'cir28': [(4, 1)], 'cir26': [(0, 2, 1)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00001>           
++1.0000|01000>            --> +1.0000|01010>           
++1.0000|00100>            --> +1.0000|00110>           
++1.0000|00010>            --> +1.0000|00000>           
++1.0000|00001>            --> +1.0000|00011>           
+Infidelity :  1.0
+   ###   On generation 8 of 10000
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir19': [(2, 4)], 'cir40': [(4, 2), (3, 4, 1)], 'cir16': [(4, 0, 1), (3,)], 'cir28': [(4, 1)], 'cir26': [(0, 2, 1)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00111>           
++1.0000|01000>            --> +1.0000|01000>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00010>           
++1.0000|00001>            --> +1.0000|00101>           
+Infidelity :  1.0
+   ###   On generation 9 of 10000
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir19': [(2, 4)], 'cir26': [(0, 2, 1)], 'cir44': [(3,), (1, 2, 0), (1, 4), (1, 4)], 'cir11': [(4, 0), (1, 0, 4), (2,)], 'cir17': [(0, 2, 1), (0, 2, 4), (1, 0), (4,)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00111>           
++1.0000|01000>            --> +1.0000|01000>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00010>           
++1.0000|00001>            --> +1.0000|00101>           
+Infidelity :  1.0
+   ###   On generation 10 of 10000
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir28': [(4, 1)], 'cir19': [(2, 4)], 'cir26': [(0, 2, 1)], 'cir16': [(4, 0, 1), (3,)], 'cir44': [(3,), (1, 2, 0), (1, 4), (1, 4)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00011>           
++1.0000|01000>            --> +1.0000|01001>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00010>           
++1.0000|00001>            --> +1.0000|00001>           
+Infidelity :  1.0
+   ###   On generation 11 of 10000
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir16': [(4, 0, 1), (3,)], 'cir28': [(4, 1)], 'cir19': [(2, 4)], 'cir26': [(0, 2, 1)], 'cir40': [(4, 2), (3, 4, 1)]}, 
+ fitness [9.0, 9.0, 9.0, 9.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00001>           
++1.0000|01000>            --> +1.0000|01010>           
++1.0000|00100>            --> +1.0000|00110>           
++1.0000|00010>            --> +1.0000|00000>           
++1.0000|00001>            --> +1.0000|00011>           
+Infidelity :  1.0
+   ###   On generation 12 of 10000
+[P2] evaluation routine starts
+[P2] evaluation routine quits
+[P4] evaluation routine starts
+[P4] evaluation routine quits
+[P0] evaluation routine starts
+[P0] evaluation routine quits
+[P1] evaluation routine starts
+[P1] evaluation routine quits
+[P3] evaluation routine starts
+[P3] evaluation routine quits
+[P7] evaluation routine starts
+[P7] evaluation routine quits
+[P6] evaluation routine starts
+[P6] evaluation routine quits
+[P5] evaluation routine starts
+[P5] evaluation routine quits
+*** population details: 5 best circuits 
+ circuits {'cir49': [(4, 2), (3, 4, 1), (3, 2, 1), (4,), (2, 1, 4), (1, 2, 4)], 'cir22': [(4, 2), (3, 4, 1), (3, 2, 1), (4,), (2, 1, 4), (1, 2, 4), (2, 3)], 'cir8': [(4, 2), (3, 4, 1), (3, 2, 1), (4,), (2, 1, 4), (1, 2, 4), (2, 3), (3,)], 'cir39': [(4, 2), (4, 3, 1), (4, 2), (3, 4, 1), (4,), (2, 4), (4, 3, 1), (2, 4, 3), (1, 2, 3), (4, 2, 1), (1, 2), (2,)], 'cir19': [(2, 4)]}, 
+ fitness [0.0, 0.0, 0.0, 0.0, 9.0] 
+
+**** best transforamtion of this generation: 
++1.0000|00011>            --> +1.0000|00010>           
++1.0000|01000>            --> +1.0000|00101>           
++1.0000|00100>            --> +1.0000|00100>           
++1.0000|00010>            --> +1.0000|00011>           
++1.0000|00001>            --> +1.0000|00000>           
+Infidelity :  0.0
+Best circuit adaptive compression
+circuit: 
+X(target=(1,), control=(0, 3))
+X(target=(3,), control=(0,))
+X(target=(4,), control=(0,))
+X(target=(0,), control=(4, 3))
+X(target=(2,), control=(0,))
+X(target=(4,), control=(2,))
+X(target=(3,), control=(4, 1))
+X(target=(3,), control=(2, 1))
+X(target=(4,))
+X(target=(2,), control=(1, 4))
+X(target=(1,), control=(2, 4))

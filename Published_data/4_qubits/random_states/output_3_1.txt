@@ -1,0 +1,197 @@
+****Starting Evolution: 
+ circuits {'cir20': [(0, 3)]}, 
+ fitness [0.0225] 
+
+**** best transforamtion at the begining: 
++1.0000|1001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|1011>             --> +1.0000|0011>            
+   ###   On generation 1 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir20': [(0, 3)]}, 
+ fitness [0.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|1001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|1011>             --> +1.0000|0011>            
+Infidelity :  0.0
+****Starting Evolution: 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion at the begining: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+   ###   On generation 1 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 2 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 3 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 4 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 5 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 6 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 7 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 8 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 9 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 10 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 11 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 12 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 13 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 14 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 15 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 16 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 17 of 10000
+*** population details: 5 best circuits 
+ circuits {'cir0': [(0, 1, 2)]}, 
+ fitness [18.0225] 
+
+**** best transforamtion of this generation: 
++1.0000|0001>             --> +1.0000|0001>            
++1.0000|0010>             --> +1.0000|0010>            
++1.0000|0011>             --> +1.0000|0011>            
+Infidelity :  2.0
+   ###   On generation 18 of 10000

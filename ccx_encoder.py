@@ -3,7 +3,8 @@ import numpy
 import random
 import numbers
 
-from utils import *
+from general_utils import *
+from encoder_utils import *
 
 # basically the same as the old binary encoder, just uses tq
 
@@ -109,22 +110,28 @@ class CCXEncoder:
             reduced = [q for q in self.qubits_choice if q not in controls]
             target = numpy.random.choice(reduced, size=1, replace=True, p=p)
             connections = [list(target)[0]]+[x for x in controls]
-            if self._trash_qubits[-1] not in connections:
+            #check if the trash qubits are in the connections randomly and add it
+            #randomly if not there with probability 0.25
+            t_q = random_choice(self._trash_qubits)
+            if t_q not in connections:
                 choice = random_choice(list(range(len(connections))))
                 choice_1 = random_choice([0, 1, 1, 1])
                 if choice_1 == 0:
-                    connections[choice] = self._trash_qubits[-1]
+                    connections[choice] = t_q
             return tuple(connections)
         elif num_controls == 2:
             controls = list(random.sample(self.qubits_choice, k = num_controls))
             reduced = [q for q in self.qubits_choice if q not in controls]
             target = numpy.random.choice(reduced, size=1, replace=True, p=p)
             connections = [list(target)[0]]+[x for x in controls]
-            if self._trash_qubits[-1] not in connections:
+            #check if the trash qubits are in the connections randomly and add it
+            #randomly if not there with probability 0.25
+            t_q = random_choice(self._trash_qubits)
+            if t_q not in connections:
                 choice = random_choice(list(range(len(connections))))
                 choice_1 = random_choice([0, 1, 1, 1])
                 if choice_1 == 0:
-                    connections[choice] = self._trash_qubits[-1]
+                    connections[choice] = t_q
             return tuple(connections)
 
     def make_objective(self, circuit_data):
@@ -157,6 +164,54 @@ class CCXEncoder:
             rdm2 = self._target_dm
             infidelity += get_infidelity(rdm1, rdm2)
         return infidelity
+
+class evolved_ccx(CCXEncoder):
+
+    def __str__(self, circuit_data):
+        """
+
+        """
+        circuit = self.make_circuit(circuit_data)
+        return circuit, circuit.__str__()
+
+    def __call__(self, circuit_data:list, *args, **kwargs):
+        """
+
+        """
+        U = self.make_circuit(circuit_data=circuit_data)
+
+        depth = U.depth
+        num_2_q_gate =  0
+        num_1_q_gate = 0
+        for gate in U.gates:
+            if gate.is_controlled():
+                num_2_q_gate += 1
+            else:
+                num_1_q_gate += 1
+
+        infidelity =  0.0
+        _1rdm = 0.0
+        _2rdm = 0.0
+
+        input_samples=self.get_input_samples()
+        for U0 in input_samples:
+            U0.n_qubits = self.num_qubits
+            U.n_qubits = self.num_qubits
+            wfn1= tq.simulate(U0+U, backend='qulacs', *args, **kwargs)
+
+            dimension = 2**(len(self.qubits))
+            dims = [[2]*len(self.qubits), [1]*len(self.qubits)]
+            rdm1 = get_wavefunction_partial_trace(dimension,dims,wfn1,self._trash_qubits)
+
+            rdm2 = self._target_dm
+
+            infidelity += get_infidelity(rdm1, rdm2)
+            _1rdm += get_1_rdm_distance(rdm1, rdm2, self._trash_qubits)
+            if len(self._trash_qubits) >= 2:
+                _2rdm += get_2_rdm_distance(rdm1, rdm2, self._trash_qubits)
+
+        return infidelity, _1rdm, _2rdm, depth, num_2_q_gate, num_1_q_gate
+
 
 if __name__ == "__main__":
     encoder = CCXEncoder(input_space=["1100", "1001", "0110", "0011"], trash_qubits=[0,1], max_controls=1)

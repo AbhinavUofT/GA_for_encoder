@@ -1,0 +1,5 @@
+****Starting Evolution: 
+ circuits {}, 
+ fitness [] 
+
+**** best transforamtion at the begining: 
